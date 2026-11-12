@@ -1,0 +1,1018 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#171418">
+  <title>Guía de diseño | Sistema visual</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --tinta: #ffffff;
+      --tinta-80: #d6d2db;
+      --tinta-60: #a8a2b0;
+      --acento: #8834dc;
+      --acento-claro: #b57ae9;
+      --acento-profundo: #5f1fa3;
+      --acento-tenue: #2a1738;
+      --fondo: #171418;
+      --superficie: #211c24;
+      --borde: #4a454f;
+      --fuente-titulos: "Montserrat", Arial, sans-serif;
+      --fuente-texto: "Archivo", Arial, sans-serif;
+      --radio: 12px;
+      --radio-sm: 6px;
+      --ancho: 1120px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--fondo);
+      color: var(--tinta);
+      font-family: var(--fuente-texto);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::selection {
+      background: var(--acento);
+      color: var(--tinta);
+    }
+
+    .page {
+      max-width: var(--ancho);
+      margin: 0 auto;
+      padding: 64px 32px 72px;
+    }
+
+    a {
+      color: var(--acento-claro);
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    a:hover {
+      text-decoration-thickness: 2px;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      margin: 0;
+      font-family: var(--fuente-titulos);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+    }
+
+    h1 {
+      font-size: clamp(38px, 6vw, 56px);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+    }
+
+    h2 {
+      font-size: 32px;
+    }
+
+    h3 {
+      font-size: 24px;
+    }
+
+    h4 {
+      font-size: 20px;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    .hero {
+      padding-bottom: 8px;
+    }
+
+    .eyebrow {
+      margin-bottom: 12px;
+      color: var(--acento-claro);
+      font-family: var(--fuente-texto);
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .lead {
+      max-width: 640px;
+      margin-top: 20px;
+      color: var(--tinta-80);
+      font-size: 18px;
+      line-height: 1.65;
+    }
+
+    section {
+      margin-top: 64px;
+      padding-top: 32px;
+      border-top: 1px solid var(--borde);
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 420px);
+      gap: 24px;
+      align-items: end;
+      margin-bottom: 28px;
+    }
+
+    .section-head p {
+      color: var(--tinta-80);
+      font-size: 16px;
+    }
+
+    .palette {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 16px;
+    }
+
+    .swatch {
+      display: flex;
+      flex-direction: column;
+      border: 1px solid var(--borde);
+      border-radius: var(--radio);
+      background: var(--superficie);
+      overflow: hidden;
+    }
+
+    .swatch-color {
+      height: 96px;
+      border-bottom: 1px solid var(--borde);
+    }
+
+    .is-tinta {
+      background: var(--tinta);
+    }
+
+    .is-acento {
+      background: var(--acento);
+    }
+
+    .is-tinta-80 {
+      background: var(--tinta-80);
+    }
+
+    .is-tinta-60 {
+      background: var(--tinta-60);
+    }
+
+    .is-fondo {
+      background: var(--fondo);
+    }
+
+    .is-superficie {
+      background: var(--superficie);
+    }
+
+    .is-borde {
+      background: var(--borde);
+    }
+
+    .is-acento-claro {
+      background: var(--acento-claro);
+    }
+
+    .is-acento-profundo {
+      background: var(--acento-profundo);
+    }
+
+    .is-acento-tenue {
+      background: var(--acento-tenue);
+    }
+
+    .swatch-body {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 18px;
+    }
+
+    .swatch-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .swatch-head h3 {
+      font-size: 20px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      padding: 2px 8px;
+      border: 1px solid var(--borde);
+      border-radius: var(--radio-sm);
+      color: var(--tinta-80);
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .tag-principal {
+      border-color: var(--acento-tenue);
+      background: var(--acento-tenue);
+      color: var(--tinta);
+    }
+
+    .code {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+    }
+
+    .use {
+      color: var(--tinta-80);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .type-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .type-card {
+      min-width: 0;
+      padding: 24px;
+      border: 1px solid var(--borde);
+      border-radius: var(--radio);
+      background: var(--superficie);
+    }
+
+    .type-card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--borde);
+    }
+
+    .specimen + .specimen {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid var(--borde);
+    }
+
+    .specimen-meta {
+      margin-bottom: 6px;
+      color: var(--tinta-60);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+    }
+
+    .specimen-title {
+      font-family: var(--fuente-titulos);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      overflow-wrap: anywhere;
+    }
+
+    .specimen-body {
+      line-height: 1.55;
+      overflow-wrap: anywhere;
+    }
+
+    .t-48 { font-size: 48px; }
+    .t-40 { font-size: 40px; }
+    .t-32 { font-size: 32px; }
+    .t-24 { font-size: 24px; }
+    .t-20 { font-size: 20px; }
+    .t-18 { font-size: 18px; }
+    .t-16 { font-size: 16px; }
+    .t-14 { font-size: 14px; }
+
+    .component {
+      margin-top: 36px;
+    }
+
+    .component:first-of-type {
+      margin-top: 0;
+    }
+
+    .component-head {
+      margin-bottom: 16px;
+    }
+
+    .component-head p {
+      max-width: 640px;
+      margin-top: 6px;
+      color: var(--tinta-80);
+      font-size: 16px;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 10px 18px;
+      border: 1px solid var(--tinta);
+      border-radius: var(--radio);
+      background: transparent;
+      color: var(--tinta);
+      font-family: var(--fuente-texto);
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 1;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .button:hover {
+      border-color: var(--acento);
+      color: var(--acento);
+    }
+
+    .button-primary {
+      border-color: var(--acento);
+      background: var(--acento);
+      color: var(--tinta);
+    }
+
+    .button-primary:hover {
+      border-color: var(--acento);
+      background: var(--acento);
+      color: var(--tinta);
+      opacity: 0.85;
+    }
+
+    .button-primary:active {
+      border-color: var(--acento-profundo);
+      background: var(--acento-profundo);
+      color: var(--tinta);
+    }
+
+    .button-quiet {
+      padding-right: 0;
+      padding-left: 0;
+      border-color: transparent;
+      color: var(--acento-claro);
+    }
+
+    .button-quiet:hover {
+      border-color: transparent;
+      color: var(--tinta);
+    }
+
+    .button:disabled,
+    .button:disabled:hover {
+      border-color: var(--tinta);
+      color: var(--tinta);
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+
+    .button-primary:disabled,
+    .button-primary:disabled:hover {
+      border-color: var(--acento);
+      color: var(--tinta);
+      opacity: 0.35;
+    }
+
+    .button:focus-visible,
+    .button-quiet:focus-visible,
+    input:focus-visible,
+    textarea:focus-visible,
+    a:focus-visible {
+      outline: 2px solid var(--acento-claro);
+      outline-offset: 3px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 24px;
+      border: 1px solid var(--borde);
+      border-radius: var(--radio);
+      background: var(--superficie);
+    }
+
+    .card .eyebrow {
+      margin-bottom: 0;
+    }
+
+    .card p {
+      color: var(--tinta-80);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: auto;
+      padding-top: 16px;
+      border-top: 1px solid var(--borde);
+    }
+
+    .card-footer a {
+      font-size: 14px;
+    }
+
+    .form {
+      max-width: 720px;
+      padding: 24px;
+      border: 1px solid var(--borde);
+      border-radius: var(--radio);
+      background: var(--superficie);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px 20px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .field-full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      min-height: 46px;
+      padding: 12px 14px;
+      border: 1px solid var(--borde);
+      border-radius: var(--radio);
+      background: var(--fondo);
+      color: var(--tinta);
+      font-family: var(--fuente-texto);
+      font-size: 16px;
+      line-height: 1.4;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: var(--tinta-60);
+      opacity: 0.8;
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    input:focus-visible,
+    textarea:focus-visible {
+      border-color: var(--acento-claro);
+    }
+
+    .help {
+      color: var(--tinta-60);
+      font-size: 13px;
+    }
+
+    .check {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-top: 20px;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1.5;
+      cursor: pointer;
+    }
+
+    .check input {
+      display: grid;
+      flex: 0 0 auto;
+      place-content: center;
+      width: 18px;
+      height: 18px;
+      min-height: 0;
+      margin-top: 2px;
+      padding: 0;
+      border: 1px solid var(--tinta);
+      border-radius: 4px;
+      background: transparent;
+      appearance: none;
+      cursor: pointer;
+    }
+
+    .check input:checked {
+      border-color: var(--acento);
+      background: var(--acento);
+    }
+
+    .check input:checked::after {
+      content: "";
+      width: 9px;
+      height: 5px;
+      border-bottom: 2px solid var(--tinta);
+      border-left: 2px solid var(--tinta);
+      transform: rotate(-45deg) translateY(-1px);
+    }
+
+    .form-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid var(--borde);
+    }
+
+    .never-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .never-item {
+      display: flex;
+      gap: 16px;
+      padding: 20px;
+      border: 1px solid var(--borde);
+      border-radius: var(--radio);
+      background: var(--superficie);
+    }
+
+    .never-num {
+      flex: 0 0 auto;
+      padding: 6px 8px;
+      border: 1px solid var(--borde);
+      border-radius: var(--radio-sm);
+      font-family: var(--fuente-titulos);
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .never-item h3 {
+      margin-bottom: 6px;
+      font-size: 20px;
+    }
+
+    .never-item p {
+      color: var(--tinta-80);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .footer {
+      margin-top: 64px;
+      padding-top: 20px;
+      border-top: 1px solid var(--borde);
+      color: var(--tinta-60);
+      font-size: 13px;
+    }
+
+    @media (max-width: 760px) {
+      .page {
+        padding: 40px 20px 56px;
+      }
+
+      .section-head {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      .type-grid,
+      .never-grid,
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .field-full {
+        grid-column: auto;
+      }
+
+      h2 {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <p class="eyebrow">Sistema visual</p>
+      <h1>Guía de diseño</h1>
+      <p class="lead">Una referencia práctica para aplicar la paleta, la tipografía y los componentes de la marca con reglas claras y consistentes.</p>
+    </header>
+
+    <main>
+      <section aria-labelledby="paleta-titulo">
+        <div class="section-head">
+          <h2 id="paleta-titulo">Paleta</h2>
+          <p>Los morados aparecen primero y luego los neutros. Tinta y Acento siguen siendo los dos colores originales.</p>
+        </div>
+
+        <div class="palette">
+          <article class="swatch">
+            <div class="swatch-color is-acento" aria-hidden="true"></div>
+            <div class="swatch-body">
+              <div class="swatch-head">
+                <h3>Acento</h3>
+                <span class="tag tag-principal">Principal</span>
+              </div>
+              <p class="code">#8834dc</p>
+              <p class="use">Acción principal, selección y relleno de énfasis.</p>
+            </div>
+          </article>
+
+          <article class="swatch">
+            <div class="swatch-color is-acento-claro" aria-hidden="true"></div>
+            <div class="swatch-body">
+              <div class="swatch-head">
+                <h3>Acento claro</h3>
+                <span class="tag">Acento</span>
+              </div>
+              <p class="code">#b57ae9</p>
+              <p class="use">Enlaces, texto de acento y estados de foco.</p>
+            </div>
+          </article>
+
+          <article class="swatch">
+            <div class="swatch-color is-acento-profundo" aria-hidden="true"></div>
+            <div class="swatch-body">
+              <div class="swatch-head">
+                <h3>Acento profundo</h3>
+                <span class="tag">Acento</span>
+              </div>
+              <p class="code">#5f1fa3</p>
+              <p class="use">Estado presionado y contornos de énfasis.</p>
+            </div>
+          </article>
+
+          <article class="swatch">
+            <div class="swatch-color is-acento-tenue" aria-hidden="true"></div>
+            <div class="swatch-body">
+              <div class="swatch-head">
+                <h3>Acento tenue</h3>
+                <span class="tag">Acento</span>
+              </div>
+              <p class="code">#2a1738</p>
+              <p class="use">Fondos suaves para etiquetas y bloques destacados.</p>
+            </div>
+          </article>
+
+          <article class="swatch">
+            <div class="swatch-color is-tinta" aria-hidden="true"></div>
+            <div class="swatch-body">
+              <div class="swatch-head">
+                <h3>Tinta</h3>
+                <span class="tag tag-principal">Principal</span>
+              </div>
+              <p class="code">#ffffff</p>
+              <p class="use">Texto principal, títulos, íconos y texto sobre acento.</p>
+            </div>
+          </article>
+
+          <article class="swatch">
+            <div class="swatch-color is-tinta-80" aria-hidden="true"></div>
+            <div class="swatch-body">
+              <div class="swatch-head">
+                <h3>Tinta 80</h3>
+                <span class="tag">Neutro</span>
+              </div>
+              <p class="code">#d6d2db</p>
+              <p class="use">Texto secundario, descripciones y contenido de apoyo.</p>
+            </div>
+          </article>
+
+          <article class="swatch">
+            <div class="swatch-color is-tinta-60" aria-hidden="true"></div>
+            <div class="swatch-body">
+              <div class="swatch-head">
+                <h3>Tinta 60</h3>
+                <span class="tag">Neutro</span>
+              </div>
+              <p class="code">#a8a2b0</p>
+              <p class="use">Texto terciario, metadatos y placeholders.</p>
+            </div>
+          </article>
+
+          <article class="swatch">
+            <div class="swatch-color is-borde" aria-hidden="true"></div>
+            <div class="swatch-body">
+              <div class="swatch-head">
+                <h3>Borde</h3>
+                <span class="tag">Neutro</span>
+              </div>
+              <p class="code">#4a454f</p>
+              <p class="use">Separadores y contornos de componentes.</p>
+            </div>
+          </article>
+
+          <article class="swatch">
+            <div class="swatch-color is-superficie" aria-hidden="true"></div>
+            <div class="swatch-body">
+              <div class="swatch-head">
+                <h3>Superficie</h3>
+                <span class="tag">Neutro</span>
+              </div>
+              <p class="code">#211c24</p>
+              <p class="use">Tarjetas, paneles, formularios y bloques de contenido.</p>
+            </div>
+          </article>
+
+          <article class="swatch">
+            <div class="swatch-color is-fondo" aria-hidden="true"></div>
+            <div class="swatch-body">
+              <div class="swatch-head">
+                <h3>Fondo</h3>
+                <span class="tag">Neutro</span>
+              </div>
+              <p class="code">#171418</p>
+              <p class="use">Fondo de página y de campos. No se usa para texto.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section aria-labelledby="tipografia-titulo">
+        <div class="section-head">
+          <h2 id="tipografia-titulo">Tipografía</h2>
+          <p>Montserrat para títulos de 20 px o más. Archivo para todo el texto de lectura, controles y etiquetas.</p>
+        </div>
+
+        <div class="type-grid">
+          <article class="type-card">
+            <div class="type-card-head">
+              <h3>Montserrat</h3>
+              <span class="tag">Títulos</span>
+            </div>
+
+            <div class="specimen">
+              <p class="specimen-meta">48 px / 700</p>
+              <p class="specimen-title t-48">Título de 48 px</p>
+            </div>
+
+            <div class="specimen">
+              <p class="specimen-meta">40 px / 700</p>
+              <p class="specimen-title t-40">Título de 40 px</p>
+            </div>
+
+            <div class="specimen">
+              <p class="specimen-meta">32 px / 700</p>
+              <p class="specimen-title t-32">Título de 32 px</p>
+            </div>
+
+            <div class="specimen">
+              <p class="specimen-meta">24 px / 700</p>
+              <p class="specimen-title t-24">Título de 24 px</p>
+            </div>
+
+            <div class="specimen">
+              <p class="specimen-meta">20 px / 700 / mínimo</p>
+              <p class="specimen-title t-20">Título de 20 px</p>
+            </div>
+          </article>
+
+          <article class="type-card">
+            <div class="type-card-head">
+              <h3>Archivo</h3>
+              <span class="tag">Texto</span>
+            </div>
+
+            <div class="specimen">
+              <p class="specimen-meta">18 px / 400</p>
+              <p class="specimen-body t-18">Texto de introducción para párrafos amplios y lecturas cómodas.</p>
+            </div>
+
+            <div class="specimen">
+              <p class="specimen-meta">16 px / 400</p>
+              <p class="specimen-body t-16">Texto de lectura habitual para el cuerpo de la página y los componentes.</p>
+            </div>
+
+            <div class="specimen">
+              <p class="specimen-meta">14 px / 500</p>
+              <p class="specimen-body t-14">Texto de apoyo para notas, etiquetas y detalles secundarios.</p>
+            </div>
+
+            <div class="specimen">
+              <p class="specimen-meta">16 px / 600 / enlace</p>
+              <p class="specimen-body t-16"><a href="#formulario">Ejemplo de enlace destacado</a></p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section aria-labelledby="componentes-titulo">
+        <div class="section-head">
+          <h2 id="componentes-titulo">Componentes</h2>
+          <p>Controles de muestra con bordes redondeados y radios consistentes.</p>
+        </div>
+
+        <div class="component">
+          <div class="component-head">
+            <h3>Botones</h3>
+            <p>Altura mínima de 44 px y esquinas redondeadas. El acento se reserva para la acción principal y los estados de foco.</p>
+          </div>
+          <div class="button-row">
+            <button class="button button-primary" type="button">Acción principal</button>
+            <button class="button" type="button">Acción secundaria</button>
+            <button class="button button-quiet" type="button">Acción de texto</button>
+            <button class="button" type="button" disabled>Deshabilitado</button>
+          </div>
+        </div>
+
+        <div class="component">
+          <div class="component-head">
+            <h3>Tarjetas</h3>
+            <p>Contenedores con borde de 1 px, superficie plana y esquinas redondeadas, sin sombras. El contenido define la jerarquía.</p>
+          </div>
+          <div class="cards">
+            <article class="card">
+              <p class="eyebrow">Categoría</p>
+              <h4>Título de la tarjeta</h4>
+              <p>Usa bordes redondeados, contenido claro y espacio suficiente. El color de acento se aplica solo en elementos puntuales.</p>
+              <div class="card-footer">
+                <a href="#formulario">Ver formulario</a>
+                <span class="tag">Ejemplo</span>
+              </div>
+            </article>
+
+            <article class="card">
+              <p class="eyebrow">Regla</p>
+              <h4>Jerarquía sin adornos</h4>
+              <p>La tipografía, el contraste y el espaciado construyen la jerarquía. No se necesitan sombras ni degradados.</p>
+              <div class="card-footer">
+                <a href="#nunca-titulo">Ver reglas</a>
+                <span class="tag">Sistema</span>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div class="component" id="formulario">
+          <div class="component-head">
+            <h3>Formulario</h3>
+            <p>Campos redondeados, etiquetas visibles y un único botón principal.</p>
+          </div>
+
+          <form class="form" action="#" method="post">
+            <div class="form-grid">
+              <div class="field">
+                <label for="nombre">Nombre</label>
+                <input id="nombre" name="nombre" type="text" placeholder="Escribe tu nombre">
+              </div>
+
+              <div class="field">
+                <label for="correo">Correo electrónico</label>
+                <input id="correo" name="correo" type="email" placeholder="nombre@ejemplo.com">
+              </div>
+
+              <div class="field field-full">
+                <label for="mensaje">Mensaje</label>
+                <textarea id="mensaje" name="mensaje" placeholder="Escribe tu mensaje"></textarea>
+                <p class="help">Máximo 240 caracteres.</p>
+              </div>
+            </div>
+
+            <label class="check" for="aviso">
+              <input id="aviso" name="aviso" type="checkbox">
+              <span>Acepto recibir una respuesta a este mensaje.</span>
+            </label>
+
+            <div class="form-actions">
+              <button class="button button-primary" type="submit">Enviar mensaje</button>
+              <button class="button" type="reset">Limpiar</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <section aria-labelledby="nunca-titulo">
+        <div class="section-head">
+          <h2 id="nunca-titulo">Lo que nunca se hace</h2>
+          <p>Reglas fijas para mantener el sistema coherente. No hay excepciones visuales.</p>
+        </div>
+
+        <div class="never-grid">
+          <article class="never-item">
+            <span class="never-num">01</span>
+            <div>
+              <h3>Sin sombras</h3>
+              <p>Ningún componente usa sombras. La separación se logra con bordes y espacio.</p>
+            </div>
+          </article>
+
+          <article class="never-item">
+            <span class="never-num">02</span>
+            <div>
+              <h3>Sin degradados</h3>
+              <p>Los colores son planos. No se mezclan tonos ni se crean transiciones de color.</p>
+            </div>
+          </article>
+
+          <article class="never-item">
+            <span class="never-num">03</span>
+            <div>
+              <h3>Sin emojis como íconos</h3>
+              <p>Los íconos se resuelven con formas, texto o recursos gráficos propios, nunca con emojis.</p>
+            </div>
+          </article>
+
+          <article class="never-item">
+            <span class="never-num">04</span>
+            <div>
+              <h3>Sin guiones largos</h3>
+              <p>En los textos no se usan guiones largos. Se prefiere punto, coma o dos puntos.</p>
+            </div>
+          </article>
+
+          <article class="never-item">
+            <span class="never-num">05</span>
+            <div>
+              <h3>Sin títulos pequeños</h3>
+              <p>Los títulos en Montserrat nunca bajan de 20 px. El texto de lectura usa Archivo.</p>
+            </div>
+          </article>
+
+          <article class="never-item">
+            <span class="never-num">06</span>
+            <div>
+              <h3>Sin acento dominante</h3>
+              <p>El morado no se usa como fondo general ni como color principal de lectura. Solo destaca.</p>
+            </div>
+          </article>
+
+          <article class="never-item">
+            <span class="never-num">07</span>
+            <div>
+              <h3>Sin tipografías extra</h3>
+              <p>No se agregan fuentes. Montserrat y Archivo cubren todos los niveles del sistema.</p>
+            </div>
+          </article>
+
+          <article class="never-item">
+            <span class="never-num">08</span>
+            <div>
+              <h3>Sin colores fuera de la paleta</h3>
+              <p>No se inventan tonos nuevos. Todo color debe salir de esta guía y respetar su función.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>Guía de diseño. Tinta #ffffff. Acento #8834dc. Tonos derivados de ambos. Bordes redondeados.</p>
+    </footer>
+  </div>
+</body>
+</html>
