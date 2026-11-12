@@ -5,12 +5,12 @@ type NoteBlock = { id: number; lane: number; hue: string };
 type LaneConfig = { color: string; soft: string; name: string; pitch: number; note: string };
 
 const LANES: LaneConfig[] = [
-  { color: "#e65a45", soft: "#f8d9d1", name: "Coral", pitch: 261.63, note: "Do" },
-  { color: "#e6a52f", soft: "#f7e7c0", name: "Miel", pitch: 293.66, note: "Re" },
-  { color: "#3b9c83", soft: "#d4ebe3", name: "Menta", pitch: 329.63, note: "Mi" },
-  { color: "#5782c3", soft: "#dce6f5", name: "Cielo", pitch: 349.23, note: "Fa" },
-  { color: "#9472bb", soft: "#e8def1", name: "Lila", pitch: 392, note: "Sol" },
-  { color: "#d56f91", soft: "#f4dce5", name: "Rosa", pitch: 440, note: "La" },
+  { color: "#b57ae9", soft: "#b57ae9", name: "1", pitch: 261.63, note: "Do" },
+  { color: "#b57ae9", soft: "#b57ae9", name: "2", pitch: 293.66, note: "Re" },
+  { color: "#b57ae9", soft: "#b57ae9", name: "3", pitch: 329.63, note: "Mi" },
+  { color: "#b57ae9", soft: "#b57ae9", name: "4", pitch: 349.23, note: "Fa" },
+  { color: "#b57ae9", soft: "#b57ae9", name: "5", pitch: 392, note: "Sol" },
+  { color: "#b57ae9", soft: "#b57ae9", name: "6", pitch: 440, note: "La" },
 ];
 
 export function PracticePrototype() {
@@ -42,7 +42,8 @@ export function PracticePrototype() {
       const pick = Math.floor(Math.random() * pending.length);
       const lane = pending.splice(pick, 1)[0];
       setQueue(pending);
-      const note = { id: nextId.current++, lane, hue: LANES[lane].color };
+      const id = nextId.current++;
+      const note = { id, lane, hue: id % 2 === 0 ? "#ffffff" : "#d6d2db" };
       setBlocks((current) => current.length < 2 ? [...current, note] : current);
     }, 760);
     return () => window.clearInterval(timer);
@@ -134,7 +135,7 @@ export function PracticePrototype() {
   return (
     <main className="pp-root">
       <style>{`
-        @font-face{font-family:'Manrope';src:local('Avenir Next'),local('Trebuchet MS')}@font-face{font-family:'DM Mono';src:local('SFMono-Regular'),local('Consolas'),local('Liberation Mono')}
+        @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Montserrat:wght@500;600;700&display=swap');
         .pp-root{--ink:#26332f;--muted:#78817b;--paper:#f4f3eb;--card:#fffef9;--line:#e7e5da;--mint:#dceee4;--green:#315e4c;min-height:100dvh;background:var(--paper);color:var(--ink);font-family:'Manrope',sans-serif;padding:26px clamp(18px,4vw,64px) 30px;box-sizing:border-box;display:flex;justify-content:center;align-items:center}
         .pp-root *{box-sizing:border-box}
         .pp-shell{width:min(1440px,100%);min-height:min(860px,calc(100dvh - 56px));background:var(--card);border-radius:26px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 18px 60px rgba(42,53,46,.07);position:relative}
@@ -215,10 +216,83 @@ export function PracticePrototype() {
         @media(min-width:1100px){.pp-shell{aspect-ratio:16/9;min-height:0}.pp-practice{min-height:0}.pp-tracks{height:clamp(390px,57vh,560px)}}
         @media(max-width:760px){.pp-root{padding:0;align-items:stretch}.pp-shell{border-radius:0;min-height:100dvh}.pp-topbar{height:69px;padding:0 20px}.pp-brand{font-size:17px}.pp-top-right .pp-label{display:none}.pp-main{padding:36px 23px 34px}.pp-config-row{grid-template-columns:1fr;gap:12px;margin-top:27px}.pp-config-card{min-height:145px;padding:20px}.pp-bottom{align-items:stretch;flex-direction:column;margin-top:23px}.pp-primary{width:100%}.pp-hint{margin-top:11px;text-align:center}.pp-practice{padding:0 12px 14px}.pp-practice-head{height:66px}.pp-session-title{display:none}.pp-score{height:35px;font-size:11px;padding:0 10px}.pp-practice-actions{gap:5px}.pp-icon-btn{width:38px;height:38px}.pp-tracks{height:clamp(410px,62vh,590px);gap:6px}.pp-lane{border-radius:10px}.pp-lane-label{top:12px;left:7px;font-size:8px;letter-spacing:0}.pp-note{width:72%;height:48px;border-radius:13px}.pp-hitline{height:43px;font-size:8px}.pp-feedback{height:56px}.pp-feedback-note{display:none}@keyframes pp-fall{from{transform:translate(-50%,0)}to{transform:translate(-50%,calc(clamp(410px,62vh,590px) - 76px))}}}
         @media(prefers-reduced-motion:reduce){.pp-note{animation-duration:10s}.pp-stepper button,.pp-primary,.pp-icon-btn{transition:none}}
+        .pp-root{--ink:#ffffff;--ink-80:#d6d2db;--ink-60:#a8a2b0;--accent:#8834dc;--accent-light:#b57ae9;--accent-deep:#5f1fa3;--accent-muted:#2a1738;--background:#171418;--surface:#211c24;--border:#4a454f;background:var(--background);color:var(--ink);font-family:'Archivo',Arial,sans-serif}
+        .pp-root *{box-sizing:border-box;box-shadow:none!important;font-family:'Archivo',Arial,sans-serif!important}
+        .pp-root h1,.pp-root h2,.pp-root h3,.pp-root h4,.pp-root .pp-brand,.pp-root .pp-card-title,.pp-root .pp-session-title{font-family:'Montserrat',Arial,sans-serif!important}
+        .pp-shell{width:min(1440px,100%);background:var(--surface);border:1px solid var(--border);border-radius:12px;box-shadow:none;aspect-ratio:16/9}
+        .pp-topbar{border-bottom:1px solid var(--border)}
+        .pp-brand{color:var(--ink);font-size:20px;font-weight:700;letter-spacing:-.02em}
+        .pp-mark{background:var(--accent);color:var(--ink);transform:none;border-radius:12px}
+        .pp-label{color:var(--ink-60);font-size:14px;letter-spacing:.06em}
+        .pp-pill{background:var(--accent-muted);color:var(--ink);font-size:14px;font-family:'Archivo',Arial,sans-serif}
+        .pp-live-dot{background:var(--accent-light);box-shadow:none}
+        .pp-kicker{color:var(--accent-light);font:600 14px 'Archivo',Arial,sans-serif;letter-spacing:.08em}
+        .pp-kicker:before{background:var(--accent)}
+        .pp-heading{color:var(--ink);font-family:'Montserrat',Arial,sans-serif!important;letter-spacing:-.03em}
+        .pp-heading em{color:var(--accent-light);font-family:'Montserrat',Arial,sans-serif!important}
+        .pp-subtitle{color:var(--ink-80);font:400 16px/1.6 'Archivo',Arial,sans-serif}
+        .pp-config-card{background:var(--surface);border:1px solid var(--border);border-radius:12px}
+        .pp-card-title{color:var(--ink);font-size:20px;font-weight:700;letter-spacing:-.01em}
+        .pp-card-note{color:var(--ink-80);font-size:14px;line-height:1.5}
+        .pp-card-icon{color:var(--accent-light)}
+        .pp-stepper button{height:44px;width:44px;border:1px solid var(--border);border-radius:12px;background:var(--background);color:var(--ink);transition:none}
+        .pp-stepper button:hover{background:var(--accent-muted);border-color:var(--accent-light);transform:none}
+        .pp-stepper button:disabled{color:var(--ink-60);cursor:not-allowed}
+        .pp-step-value{color:var(--ink);font:600 18px 'Archivo',Arial,sans-serif}
+        .pp-lane-dot{background:var(--accent-light)}
+        .pp-range-field label{color:var(--ink-80);font:600 14px 'Archivo',Arial,sans-serif;letter-spacing:0;text-transform:none}
+        .pp-range-field select{min-height:46px;border:1px solid var(--border);border-radius:12px;background:var(--background);color:var(--ink);font:400 16px 'Archivo',Arial,sans-serif}
+        .pp-range-field select:focus-visible,.pp-root button:focus-visible{outline:2px solid var(--accent-light);outline-offset:3px}
+        .pp-select-wrap svg{color:var(--ink-80)}
+        .pp-range-dash{color:var(--ink-80);font:400 16px 'Archivo',Arial,sans-serif}
+        .pp-bottom{margin-top:28px}
+        .pp-preview{color:var(--ink-80);font-size:14px}
+        .pp-preview-bars i{border-radius:2px 2px 0 0}
+        .pp-primary{min-height:55px;border:1px solid var(--accent);border-radius:12px;background:var(--accent);color:var(--ink);font:600 16px 'Archivo',Arial,sans-serif;box-shadow:none;transition:none}
+        .pp-primary:hover{border-color:var(--accent);background:var(--accent);color:var(--ink);opacity:.85;transform:none}
+        .pp-primary:active,.pp-small-btn.primary:active{border-color:var(--accent-deep);background:var(--accent-deep)}
+        .pp-hint{color:var(--ink-60);font:400 14px 'Archivo',Arial,sans-serif}
+        .pp-back{min-height:44px;padding:8px 14px;border:1px solid var(--border);border-radius:12px;background:var(--surface);color:var(--accent-light);font:600 16px 'Archivo',Arial,sans-serif}
+        .pp-back:hover{border-color:var(--accent);background:var(--accent-muted);color:var(--ink)}
+        .pp-session-title{color:var(--ink);font-size:20px;font-weight:700}
+        .pp-score{height:44px;border:1px solid var(--border);border-radius:12px;background:var(--accent-muted);color:var(--ink);font:400 16px 'Archivo',Arial,sans-serif}
+        .pp-icon-btn{height:44px;width:44px;border:1px solid var(--border);border-radius:12px;background:var(--surface);color:var(--ink);transition:none}
+        .pp-icon-btn:hover{border-color:var(--accent-light);background:var(--accent-muted);transform:none}
+        .pp-icon-btn.pp-strong{border-color:var(--accent);background:var(--accent);color:var(--ink)}
+        .pp-tracks{background:var(--accent);gap:10px}
+        .pp-lane{border:0;border-radius:0;background:var(--lane-soft)}
+        .pp-lane-label{display:none}
+        .pp-note{left:0;top:0;transform:translateY(0);width:100%;height:54px;border:0;border-radius:0;background:var(--note-color);color:var(--accent-muted);box-shadow:none;animation:pp-fall 5.5s linear forwards;animation-play-state:var(--fall-state,running)}
+        .pp-note:hover{filter:none;outline:2px solid var(--ink);outline-offset:-2px}
+        .pp-note:focus-visible{outline:2px solid var(--ink);outline-offset:-2px}
+        .pp-hitline{height:46px;border-top:1px solid var(--border);background:var(--surface);color:var(--ink-80);font:600 14px 'Archivo',Arial,sans-serif;letter-spacing:0;text-transform:none}
+        .pp-hitline:before{display:none}
+        .pp-feedback{color:var(--ink-80)}
+        .pp-message{color:var(--ink-80);font:500 14px 'Archivo',Arial,sans-serif}
+        .pp-message-icon{background:var(--accent-muted);color:var(--accent-light)}
+        .pp-feedback-note{color:var(--ink-60);font:400 14px 'Archivo',Arial,sans-serif}
+        .pp-overlay{background:var(--background);backdrop-filter:none}
+        .pp-overlay-card{border:1px solid var(--border);border-radius:12px;background:var(--surface);color:var(--ink);box-shadow:none}
+        .pp-overlay-card h2{color:var(--ink);font:700 24px 'Montserrat',Arial,sans-serif!important}
+        .pp-overlay-card p{color:var(--ink-80);font:400 16px/1.6 'Archivo',Arial,sans-serif}
+        .pp-overlay-icon{border-radius:12px;background:var(--accent-muted);color:var(--accent-light)}
+        .pp-small-btn{min-height:44px;border:1px solid var(--border);border-radius:12px;background:var(--background);color:var(--ink);font:600 16px 'Archivo',Arial,sans-serif}
+        .pp-small-btn.primary{border-color:var(--accent);background:var(--accent);color:var(--ink)}
+        .pp-root button:disabled{opacity:.35;cursor:not-allowed}
+        .pp-main{padding:36px clamp(22px,8vw,118px) 20px}
+        .pp-config-row{margin-top:24px}
+        .pp-config-card{min-height:152px;padding:20px 22px}
+        .pp-stepper{margin-top:12px}
+        .pp-range{margin-top:10px}
+        .pp-bottom{margin-top:18px}
+        .pp-hint{margin-top:10px}
+        @keyframes pp-fall{from{transform:translateY(0)}to{transform:translateY(calc(clamp(390px,58vh,570px) - 54px))}}
+        @media(min-width:1100px){.pp-shell{width:min(1440px,calc((100dvh - 52px) * 1.7778),100%);min-height:0;aspect-ratio:16/9}.pp-tracks{height:clamp(390px,58vh,570px)}}
+        @media(max-width:760px){.pp-root{padding:0;align-items:stretch}.pp-shell{width:100%;height:100dvh;min-height:100dvh;aspect-ratio:auto;border-radius:0}.pp-brand{font-size:20px}.pp-main{padding:30px 20px 24px}.pp-config-row{grid-template-columns:1fr;gap:12px;margin-top:24px}.pp-config-card{min-height:145px;padding:20px}.pp-bottom{align-items:stretch;flex-direction:column;margin-top:22px}.pp-primary{width:100%}.pp-practice{padding:0 12px 14px}.pp-practice-head{height:66px}.pp-session-title{display:none}.pp-score{height:44px;font-size:14px;padding:0 10px}.pp-practice-actions{gap:5px}.pp-icon-btn{width:44px;height:44px}.pp-tracks{height:clamp(390px,62vh,590px);gap:6px}.pp-note{width:100%;height:48px}.pp-hitline{height:44px;font-size:14px}.pp-feedback{height:56px}.pp-feedback-note{display:none}@keyframes pp-fall{from{transform:translateY(0)}to{transform:translateY(calc(clamp(390px,62vh,590px) - 48px))}}}
       `}</style>
       <section className="pp-shell">
         <header className="pp-topbar">
-          <div className="pp-brand"><span className="pp-mark"><Music2 size={19} strokeWidth={2.4} /></span><span>Ritmo a mano</span></div>
+          <div className="pp-brand"><span className="pp-mark"><Music2 size={19} strokeWidth={2.4} /></span><span>Kinusic</span></div>
           <div className="pp-top-right">
             <span className="pp-label">Tu espacio de práctica</span>
             <span className="pp-pill"><span className="pp-live-dot" />Sin instrumento, con ritmo</span>
@@ -245,7 +319,7 @@ export function PracticePrototype() {
                 <div className="pp-card-head"><div><h2 className="pp-card-title">Bloques por carril</h2><div className="pp-card-note">La cantidad cambia en cada práctica.</div></div><span className="pp-card-icon"><Music2 size={20} /></span></div>
                 <div className="pp-range">
                   <div className="pp-range-field"><label htmlFor="pp-min">Mínimo</label><div className="pp-select-wrap"><select id="pp-min" value={minBlocks} onChange={(event) => updateMin(Number(event.target.value))}>{Array.from({ length: 12 }, (_, index) => index + 1).map((count) => <option key={count} value={count}>{count} bloques</option>)}</select><ChevronDown size={14} /></div></div>
-                  <span className="pp-range-dash">—</span>
+                  <span className="pp-range-dash">a</span>
                   <div className="pp-range-field"><label htmlFor="pp-max">Máximo</label><div className="pp-select-wrap"><select id="pp-max" value={maxBlocks} onChange={(event) => updateMax(Number(event.target.value))}>{Array.from({ length: 12 }, (_, index) => index + 1).map((count) => <option key={count} value={count}>{count} bloques</option>)}</select><ChevronDown size={14} /></div></div>
                 </div>
               </section>
@@ -273,11 +347,10 @@ export function PracticePrototype() {
               <div className="pp-tracks" style={{ gridTemplateColumns: `repeat(${laneCount}, minmax(0, 1fr))` }}>
                 {lanePalette.map((lane, index) => (
                   <div className="pp-lane" key={lane.name} style={{ "--lane-color": lane.color, "--lane-soft": lane.soft } as React.CSSProperties}>
-                    <div className="pp-lane-label"><b />{lane.name}</div>
-                    {blocks.filter((block) => block.lane === index).map((block) => <button key={block.id} className="pp-note" style={{ "--note-color": block.hue, "--fall-state": paused ? "paused" : "running" } as React.CSSProperties} onClick={() => hitBlock(block)} onAnimationEnd={() => setBlocks((current) => current.filter((item) => item.id !== block.id))} aria-label={`Tocar nota ${lane.note}, carril ${lane.name}`}><span>{lane.note}</span></button>)}
+                    {blocks.filter((block) => block.lane === index).map((block) => <button key={block.id} className="pp-note" style={{ "--note-color": block.hue, "--fall-state": paused ? "paused" : "running" } as React.CSSProperties} onClick={() => hitBlock(block)} onAnimationEnd={() => setBlocks((current) => current.filter((item) => item.id !== block.id))} aria-label={`Tocar nota ${lane.note}, carril ${lane.name}`} />)}
                   </div>
                 ))}
-                <div className="pp-hitline"><span>⌁</span> Toca el bloque en cualquier momento <span>⌁</span></div>
+                <div className="pp-hitline">Toca cualquier bloque mientras cae</div>
               </div>
               {paused && <div className="pp-overlay"><div className="pp-overlay-card"><div className="pp-overlay-icon"><Pause size={22} /></div><h2>Tómate tu tiempo.</h2><p>Todo se queda justo donde lo dejaste. Vuelve cuando quieras.</p><div className="pp-overlay-buttons"><button className="pp-small-btn primary" onClick={() => setPaused(false)}><Play size={15} fill="currentColor" /> Continuar</button><button className="pp-small-btn" onClick={resetRun}><RotateCcw size={15} /> Empezar de nuevo</button></div></div></div>}
               {finished && <div className="pp-overlay"><div className="pp-overlay-card"><div className="pp-overlay-icon"><Check size={24} /></div><h2>¡Lo hiciste!</h2><p>Completaste la práctica con {hits} {hits === 1 ? "toque" : "toques"}. El ritmo ya es tuyo.</p><div className="pp-overlay-buttons"><button className="pp-small-btn primary" onClick={resetRun}><RotateCcw size={15} /> Otra vuelta</button><button className="pp-small-btn" onClick={() => { setScreen("setup"); setFinished(false); }}><ArrowLeft size={15} /> Ajustar</button></div></div></div>}
